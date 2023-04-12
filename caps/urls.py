@@ -1,0 +1,66 @@
+from django.urls import include, path
+
+from .views import (
+    GetSeasonsDataView,
+    GetSeasonDataView,
+    CreateSeasonView,
+    CreateEpisodieView,
+    EditSeasonView,
+    EditEpisodieView,
+    DeleteEpisodieView,
+    DeleteSeasonView,
+    GetEpisodiesDataView,
+    GetEpisodieDataView)
+
+urlpatterns = [
+    path(
+        "all-seasons/",
+        GetSeasonsDataView.as_view(), 
+        name="seasons"
+        ),
+    path(
+        "season/<int:season_id>/",
+        GetSeasonDataView.as_view(), 
+        name="season-detail"
+        ),
+    path(
+        "season/create/",
+        CreateSeasonView.as_view(), 
+        name="season-create"
+        ),
+    path(
+        "season/<int:season_id>/edit/",
+        EditSeasonView.as_view(), 
+        name="season-edit"
+        ),
+    path(
+        "season/<int:season_id>/delete/",
+        DeleteSeasonView.as_view(), 
+        name="season-delete"
+        ),
+    path(
+        "all-episodies/",
+        GetEpisodiesDataView.as_view(), 
+        name="episodies"
+        ),
+    path(
+        "episodie/<int:episodie_id>/",
+        GetEpisodieDataView.as_view(), 
+        name="episodies"
+        ),
+    path(
+        "episodie/create/",
+        CreateEpisodieView.as_view(), 
+        name="episodie-create"
+        ),
+    path(
+        "episodie/<int:episodie_id>/edit/",
+        EditEpisodieView.as_view(), 
+        name="episodie-edit"
+        ),
+    path(
+        "episodie/<int:episodie_id>/delete/",
+        DeleteEpisodieView.as_view(), 
+        name="episodie-delete"
+        ),
+]
