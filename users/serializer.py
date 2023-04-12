@@ -19,7 +19,7 @@ class CustomRegisterSerializer(serializers.ModelSerializer):
         fields = ('nickname', 'password', 'first_name', 'last_name')
 
     def create(self, validated_data):
-        user = CustomUser.objects.create_user(**validated_data)
+        user = CustomUser.objects.create(**validated_data)
         return user
 
 
@@ -27,6 +27,7 @@ class CustomLoginSerializer(serializers.Serializer):
     nickname = serializers.CharField()
     password = serializers.CharField()
 
+    """
     def validate(self, data):
         nickname = data.get('nickname', None)
         password = data.get('password', None)
@@ -49,3 +50,4 @@ class CustomLoginSerializer(serializers.Serializer):
             'user': CustomUserSerializer(user).data,
             'token': token.key
         }
+    """

@@ -34,6 +34,8 @@ class GetSeasonsDataView(GenericAPIView):
             return Response({"seasons": serializer.data}, status=200)
         except Season.DoesNotExist:
             return Response({"error": "Seasons does not exist"}, status=404)
+        except PermissionDenied as e:
+            return Response({"error": str(e)}, status=401)
         except Exception as e:
             return Response({"error": str(e)}, status=500)
 

@@ -94,6 +94,17 @@ REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
 }
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        }
+    },
+    'USE_SESSION_AUTH': False,
+}
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

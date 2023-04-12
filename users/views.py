@@ -1,5 +1,5 @@
 from rest_framework.authtoken.models import Token
-from rest_framework.views import GenericAPIView
+from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 
 from django.contrib.auth import authenticate
@@ -45,12 +45,12 @@ class LoginView(GenericAPIView):
         if not serializer.is_valid():
             return Response({"errors": serializer.errors}, status=400)
         try:
-            email = serializer.validated_data['email']
+            nickname = serializer.validated_data['nickname']
             password = serializer.validated_data['password']
-            user = authenticate(request=request, username=email, password=password)
-            if user is not None:
+            user = authenticate(username=nickname, password=password)
+            if user:
                 token, created = Token.objects.get_or_create(user=user)
-                return Response({'token': token.key})
+                return Response({'token': token.key}, status=200)
             else:
                 return Response({'error': 'Usuario o contraseña incorrectos'}, status=401)
         except Exception as e:
