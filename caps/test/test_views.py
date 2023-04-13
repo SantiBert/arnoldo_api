@@ -6,6 +6,8 @@ from caps.models import Season, Episodies
 
 from django.urls import reverse
 
+from users.test.fixtures import common_user_token
+
 @pytest.mark.django_db()
 def test_get_season_list_successfully():
     client = APIClient()
@@ -39,8 +41,9 @@ def test_get_season_wrong_id():
     assert data == "Seasons does not exist"
 
 @pytest.mark.django_db()
-def test_create_season_successfully():
+def test_create_season_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     payload = {
         "name": "Temporada 1",
         "image": "http://elarnoldo.pythonanywhere.com/media/Season/Sin_t%C3%ADtulo-1_LvZBxJQ.png",
@@ -57,8 +60,9 @@ def test_create_season_successfully():
     assert response.status_code == 200
     
 @pytest.mark.django_db()
-def test_create_season_bad_request():
+def test_create_season_bad_request(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     payload = {
         "name": False,
         "image": "http://elarnoldo.pythonanywhere.com/media/Season/Sin_t%C3%ADtulo-1_LvZBxJQ.png",
@@ -75,8 +79,9 @@ def test_create_season_bad_request():
     assert response.status_code == 400
     
 @pytest.mark.django_db()
-def test_update_season_successfully():
+def test_update_season_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     payload = {
         "name":"Temporada b",
@@ -93,8 +98,9 @@ def test_update_season_successfully():
     assert response.status_code == 200
     
 @pytest.mark.django_db()
-def test_update_season_dont_exists():
+def test_update_season_dont_exists(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     payload = {
         "name":"Temporada b",
@@ -113,8 +119,9 @@ def test_update_season_dont_exists():
     assert data == "Season does not exist"
 
 @pytest.mark.django_db()
-def test_delete_season_successfully():
+def test_delete_season_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
 
     url = reverse("season-delete", kwargs={"season_id": season.id})
@@ -130,8 +137,9 @@ def test_delete_season_successfully():
     assert response.status_code == 404
     
 @pytest.mark.django_db()
-def test_delete_season_dont_exists():
+def test_delete_season_dont_exists(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
 
     url = reverse("season-delete", kwargs={"season_id": 9999})
@@ -143,8 +151,9 @@ def test_delete_season_dont_exists():
     assert data == "Season does not exist"
 
 @pytest.mark.django_db()
-def test_create_episodie_successfully():
+def test_create_episodie_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     
     payload = {
@@ -169,8 +178,9 @@ def test_create_episodie_successfully():
     
 
 @pytest.mark.django_db()
-def test_create_episodie_wrong_name():
+def test_create_episodie_wrong_name(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     
     payload = {
@@ -194,8 +204,9 @@ def test_create_episodie_wrong_name():
     assert response.status_code == 400
     
 @pytest.mark.django_db()
-def test_create_episodie_wrong_season():
+def test_create_episodie_wrong_season(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     
     payload = {
@@ -222,8 +233,9 @@ def test_create_episodie_wrong_season():
 
 
 @pytest.mark.django_db()
-def test_update_episodie_successfully():
+def test_update_episodie_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     season_2 = Season.objects.create(name="Temaporada 2")
     episodie = Episodies.objects.create(name="Frutas en el centro & La bicicleta de Eugene", season=season)
@@ -253,8 +265,9 @@ def test_update_episodie_successfully():
 
 
 @pytest.mark.django_db()
-def test_update_episodie_wrong_season():
+def test_update_episodie_wrong_season(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     episodie = Episodies.objects.create(name="Frutas en el centro & La bicicleta de Eugene", season=season)
     
@@ -281,8 +294,9 @@ def test_update_episodie_wrong_season():
     assert error == 'Season does not exist'
     
 @pytest.mark.django_db()
-def test_delete_episodie_successfully():
+def test_delete_episodie_successfully(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     episodie = Episodies.objects.create(name="Frutas en el centro & La bicicleta de Eugene", season=season)
 
@@ -295,8 +309,9 @@ def test_delete_episodie_successfully():
     assert message == 'Episodie deleted'
 
 @pytest.mark.django_db()
-def test_delete_episodie_wrog_id():
+def test_delete_episodie_wrog_id(common_user_token):
     client = APIClient()
+    client.credentials(HTTP_AUTHORIZATION="Token " + common_user_token)
     season = Season.objects.create(name="Temaporada 1")
     episodie = Episodies.objects.create(name="Frutas en el centro & La bicicleta de Eugene", season=season)
 
