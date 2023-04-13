@@ -1,25 +1,3 @@
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
-from django.utils.translation import gettext_lazy as _
-from django.utils import timezone
 
-from .managers import CustomUserManager
-
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-    nickname = models.CharField(_('email address'),max_length=30, unique=True)
-    first_name = models.CharField(_('first name'), max_length=30)
-    last_name = models.CharField(_('last name'), max_length=30)
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
-    is_active = models.BooleanField(_('active'), default=True)
-    is_staff = models.BooleanField(_('staff status'), default=False)
-    
-    objects = CustomUserManager()
-
-    USERNAME_FIELD = 'nickname'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
-    
-    def get_by_natural_key(self, username):
-        return self.get(nickname=username)
-
-    def __str__(self):
-        return self.nickname
+# Create your models here.

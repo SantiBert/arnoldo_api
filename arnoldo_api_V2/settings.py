@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'users',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+    'users',
     'drf_yasg',
     'caps',
 ]
@@ -73,26 +73,13 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'arnoldo_api_V2.wsgi.application'
-
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ),
+    ],
 }
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'rest_framework.authentication.TokenAuthentication',
-)
-
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
-}
-
-REST_AUTH_SERIALIZERS = {
-    'LOGIN_SERIALIZER': 'users.serializers.CustomLoginSerializer',
-}
+WSGI_APPLICATION = 'arnoldo_api_V2.wsgi.application'
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
@@ -134,8 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-AUTH_USER_MODEL = 'users.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
