@@ -1,24 +1,6 @@
-from django.urls import include, path
-
-from .views import (
-    CustomUserView,
-    CustomRegisterView,
-    LoginView)
+from django.urls import path
+from .views import CustomAuthToken
 
 urlpatterns = [
-    path(
-        "auth/login/",
-        LoginView.as_view(), 
-        name="login"
-        ),
-    path(
-        "auth/register/",
-        CustomRegisterView.as_view(), 
-        name="register"
-        ),
-    path(
-        "auth/users/",
-        CustomUserView.as_view(), 
-        name="users"
-        ),
+    path('auth/login/', CustomAuthToken.as_view(), name='login'),
 ]
