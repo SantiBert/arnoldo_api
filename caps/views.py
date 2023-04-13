@@ -55,7 +55,7 @@ class GetSeasonDataView(GenericAPIView):
 
 class CreateSeasonView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CreateSeasonSerializer
 
     def post(self, request):
@@ -85,7 +85,7 @@ class CreateSeasonView(GenericAPIView):
 
 class EditSeasonView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = EditSeasonSerializer
 
     def post(self, request, season_id):
@@ -124,7 +124,7 @@ class EditSeasonView(GenericAPIView):
 
 class DeleteSeasonView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = None
 
     def delete(self, request, season_id):
@@ -169,7 +169,7 @@ class GetEpisodiesDataView(ListAPIView):
 
 class GetEpisodieDataView(GenericAPIView):
     
-    serializer_class = None
+    serializer_class = EpisodiesSerializer
 
     def get(self, request, episodie_id):
         try:
@@ -183,7 +183,7 @@ class GetEpisodieDataView(GenericAPIView):
 
 class CreateEpisodieView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = CreateEpisodiesSerializer
 
     def post(self, request):
@@ -229,7 +229,7 @@ class CreateEpisodieView(GenericAPIView):
 
 class EditEpisodieView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = EditEpisodiesSerializer
 
     def post(self, request, episodie_id):
@@ -298,7 +298,7 @@ class EditEpisodieView(GenericAPIView):
 
 class DeleteEpisodieView(GenericAPIView):
     
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
     serializer_class = None
 
     def delete(self, request, episodie_id):
