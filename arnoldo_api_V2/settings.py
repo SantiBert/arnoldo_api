@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'drf_yasg',
     'caps',
+    'socialmedia',
 ]
 
 MIDDLEWARE = [
