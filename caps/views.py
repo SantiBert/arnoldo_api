@@ -1,7 +1,6 @@
-from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 
-from rest_framework import generics, permissions
+from rest_framework import permissions
 from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework.response import Response
 
@@ -147,7 +146,7 @@ class DeleteSeasonView(GenericAPIView):
 
 class GetEpisodiesDataView(GenericAPIView):
     
-    serializer_class = None
+    serializer_class = EpisodiesSerializer
 
     def get(self, request):
         try:
