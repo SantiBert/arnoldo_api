@@ -23,7 +23,7 @@ class GetSocialMediaDataView(GenericAPIView):
         try:
             episodies = SocialMedia.objects.all()
             serializer = SocialMediaSerilizer(episodies,many=True)
-            return Response({"episodies": serializer.data}, status=200)
+            return Response({"social_media": serializer.data}, status=200)
         except SocialMedia.DoesNotExist:
             return Response({"error": "Episodies does not exist"}, status=404)
         except Exception as e:
